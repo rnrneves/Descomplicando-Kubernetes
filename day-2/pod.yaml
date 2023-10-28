@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: thanus    
+  name: thanus
+spec:
+  containers:
+  - name: thanus
+    image: nginx
+    ports:
+    - containerPort: 80

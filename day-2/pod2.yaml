@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: iron
+    app: webserver
+  name: iron
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+  - image: ubuntu
+    name: ubuntu
+    args:
+    - sleep
+    - "600"  
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+
+      
