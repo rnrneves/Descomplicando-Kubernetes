@@ -1,6 +1,6 @@
 # Comandos utilizados 
-*kubectl get pods -n kube-system
-*kubectl get pods -n kube-system -o wide
+* kubectl get pods -n kube-system
+* kubectl get pods -n kube-system -o wide
 
 kubectl get pods -A
 
