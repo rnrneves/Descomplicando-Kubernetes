@@ -1,4 +1,22 @@
 # Comandos utilizados 
+
+# Instala o Docker 
+* sudo curl -fsSL https://get.docker.com | bash
+* sudo usermod -aG docker rnrneves
+* sudo chmod 666 /var/run/docker.sock
+
+# Instala o kubectl no Linux 
+* curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+* chmod +x ./kubectl
+* sudo mv ./kubectl /usr/local/bin/kubectl
+* kubectl version --client
+  
+# Instala o Kind no Linux 
+* curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
+* chmod +x ./kind
+* sudo mv ./kind /usr/local/bin/kind
+
+# Comandos utilizados para pod
 * kubectl get pods -n kube-system
 * kubectl get pods -n kube-system -o wide
 * kubectl get pods -A
@@ -17,3 +35,35 @@
 * kubectl exec ironman -- cat /home/rai.txt
 * kubectl get pods -w
 * kubectl delete -f pod.yaml
+
+# Comandos utilizados para Deployment
+* kubectl get deployments.apps
+* kubectl get deployment
+* kubectl get deploy
+* kubectl get deploy -o yaml
+* kubectl get pods -l app=nginx-deployment
+* kubectl get replicaset
+* kubectl describe deployment nginx-deployment
+* kubectl delete -f deployment.yaml
+* kubectl create deployment --image nginx --replicas 3 nginx-deployment
+* kubectl create deployment --image nginx --replicas 3 nginx-deployment --dry-run=client
+* kubectl create deployment --image nginx --replicas 3 nginx-deployment --dry-run=client -o yaml
+* kubectl create deployment --image nginx --replicas 3 nginx-deployment --dry-run=client -o yaml > new-deployment.yaml
+* kubectl exec -ti nginx-deployment-66fb7f764c-8k4xx -- bash
+* cat /proc/1/cmdline  ->Comando executado dentro do container
+* kubectl create namespace rai-teste
+* kubectl get namespaces 
+* kubectl create namespace rai-teste --dry-run=client -o yaml
+* kubectl get deploy -n rai-teste
+* kubectl get pods -n rai-teste
+* kubectl exec -it -n rai-teste nginx-deployment-7d89c5876d-58r6f -- nginx -v
+* kubectl  describe deploy -n rai-teste nginx-deployment
+* kubectl rollout status deployment -n rai-teste nginx-deployment
+* kubectl rollout undo deploy -n rai-teste nginx-deployment
+* kubectl rollout history deploy -n rai-teste nginx-deployment
+* kubectl rollout history deploy -n rai-teste nginx-deployment --revision 3
+* kubectl rollout undo deployment -n rai-teste nginx-deployment --to-revision=3
+* kubectl rollout pause deploy  -n rai-teste nginx-deployment
+* kubectl rollout resume deploy  -n rai-teste nginx-deployment
+* kubectl rollout restart deploy  -n rai-teste nginx-deployment
+
