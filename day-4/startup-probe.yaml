@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deployment
+      #fruta: abacate
+  name: nginx-deployment
+    #namespace: rai-teste
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-deployment
+  strategy: {}
+  #type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+      - image: nginx:1.15.0
+        name: nginx
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 256Mi
+          requests:
+              cpu: 0.4
+              memory: 64Mi
+        livenessProbe:
+          #tcpSocket:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10 #Aguarda 10 segundos antes de fazer a primeira consulta
+          periodSeconds: 10 #Roda o teste a cada 10 segundos
+          timeoutSeconds: 5 #Tenta fazer a conexao durante 5 segundos
+          failureThreshold: 3 #Quantas vezes o pod precisa falhar para que seja reiniciado.
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /usr/share/nginx/html/index.html   
+          initialDelaySeconds: 10 #Aguarda 10 segundos antes de fazer a primeira consulta
+          periodSeconds: 10 #Roda o teste a cada 10 segundos
+          timeoutSeconds: 5 #Tenta fazer a conexao durante 5 segundos
+          failureThreshold: 3 #Quantas vezes o pod precisa falhar para que seja reiniciado.
+          successThreshold: 1
+        startupProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 10 #Aguarda 10 segundos antes de fazer a primeira consulta
+          timeoutSeconds: 5 #Tenta fazer a conexao durante 5 segundos
+          failureThreshold: 3 #Quantas vezes o pod precisa falhar para que seja reiniciado.
+          sucessThreshold: 1
+
+
