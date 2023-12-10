@@ -67,3 +67,18 @@
 * kubectl rollout resume deploy  -n rai-teste nginx-deployment
 * kubectl rollout restart deploy  -n rai-teste nginx-deployment
 
+# Comandos utilizados no Day 4
+* kubectl apply -f deploy-replicaset.yaml
+* kubectl get pods
+* kubectl get replicaset
+* kubectl get rs
+* kubectl rollout undo deployment nginx-deployment
+* kubectl scale deployment nginx-deployment --replicas 3
+* kubectl delete pod nginx-tio-rai-t5pgs
+* kubectl delete pod nginx-tio-rai-dmdr5 nginx-tio-rai-sq5qs
+* kubectl get pods -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{"\t"}{range .spec.containers[*]}{.image}{"\t"}{end}{end}'
+* kubectl get daemonset
+* kubectl get ds
+* kubectl get pods -o wide -l app=node-exporter-daemonset
+* kubectl exec --stdin --tty nginx-deployment-588695ddf8-jbqvl -- /bin/bash   --> Acessa um pod
+* watch kubectl get pods 
